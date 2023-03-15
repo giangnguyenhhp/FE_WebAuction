@@ -1,0 +1,71 @@
+<ng-container>
+  <c-header >
+    <c-container fluid>
+      <c-header-brand>
+        <c-header-nav>
+          <c-nav-item>
+            <a cNavLink routerLink="/introdcution">Giới thiệu</a>
+          </c-nav-item>
+          <c-nav-item>
+            <a cNavLink routerLink="/seller">Dành cho người bán</a>
+          </c-nav-item>
+          <c-nav-item>
+            <a cNavLink routerLink="/contact">Contact</a>
+          </c-nav-item>
+        </c-header-nav>
+      </c-header-brand>
+      <c-header-nav>
+        <c-nav-item>
+          <a cNavLink *ngIf="IsAdminLoggedIn()" routerLink="/admin">Admin Site</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a cNavLink routerLink="/authentication/login">Login</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a cNavLink routerLink="/authentication/register">Register</a>
+        </c-nav-item>
+        <c-nav-item>
+          <a cNavLink >
+            <button (click)="logOut()">LogOut</button>
+          </a>
+        </c-nav-item>
+      </c-header-nav>
+    </c-container>
+  </c-header>
+</ng-container>
+<ng-container>
+  <c-header>
+    <c-container class="header"
+                 style="border-bottom: 1px solid rgba(221,221,221,.49); position: relative; z-index: 1; background: white; "
+                 id="header-sticky"
+                 fluid>
+      <c-header-brand>
+        <c-header-nav class="ms-auto">
+          <c-nav-item cNavLink>
+            Auction
+          </c-nav-item>
+          <c-nav-item cNavLink>
+            Cuộc đấu giá
+          </c-nav-item>
+          <c-nav-item cNavLink>
+            Loại tài sản
+          </c-nav-item>
+          <c-nav-item cNavLink>
+            Tin tức
+          </c-nav-item>
+          <c-nav-item cNavLink>
+            Phòng trưng bày
+          </c-nav-item>
+        </c-header-nav>
+      </c-header-brand>
+      <c-header-nav>
+        <c-nav-item>
+          Đồng hồ
+        </c-nav-item>
+        <c-nav-item>
+          <input type="text">
+        </c-nav-item>
+      </c-header-nav>
+    </c-container>
+  </c-header>
+</ng-container>
