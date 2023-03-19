@@ -13,6 +13,7 @@ import {
   DropdownModule,
   GridModule,
   HeaderModule,
+  ListGroupModule,
   NavModule,
   SidebarModule
 } from "@coreui/angular";
@@ -23,6 +24,15 @@ import {MainLayoutComponent} from './containers/main-layout/main-layout.componen
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatDialogModule} from "@angular/material/dialog";
 import {ErrorHandlerService} from "./Views/authentication/Interceptor/error-handle.interceptor";
+import {LoginInterceptor} from "./Views/authentication/Interceptor/login.interceptor";
+import {PrivacyComponent} from './Views/privacy/privacy.component';
+import {JwtModule} from "@auth0/angular-jwt";
+import { ForbiddenComponent } from './Views/forbidden/forbidden.component';
+import {NotFoundComponent} from "./Views/not-found/not-found.component";
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -30,7 +40,10 @@ import {ErrorHandlerService} from "./Views/authentication/Interceptor/error-hand
     DefaultHeaderComponent,
     DefaultFooterComponent,
     AdminLayoutComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    PrivacyComponent,
+    ForbiddenComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -48,12 +61,25 @@ import {ErrorHandlerService} from "./Views/authentication/Interceptor/error-hand
     DropdownModule,
     AvatarModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    ListGroupModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter : tokenGetter,
+        allowedDomains : ['localhost:5001'],
+        disallowedRoutes : []
+      }
+    })
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoginInterceptor,
       multi: true
     },
     IconSetService,

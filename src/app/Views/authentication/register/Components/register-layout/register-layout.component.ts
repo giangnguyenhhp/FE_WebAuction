@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordValidatorService} from "../../../../user/Services/password-validator.service";
 import {RegisterUserRequestDto} from "../../Models/RegisterUserRequestDto";
-import {UserService} from "../../../../user/Services/user.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../../../Services/authentication.service";
 
 @Component({
   selector: 'app-register-layout',
@@ -25,7 +25,7 @@ export class RegisterLayoutComponent {
 
   constructor(
     private passwordService: PasswordValidatorService,
-    private userService: UserService,
+    private authService : AuthenticationService,
     private router : Router
   ) {
   }
@@ -38,7 +38,7 @@ export class RegisterLayoutComponent {
   register() {
     const request = <RegisterUserRequestDto>this.registerFormGroup.value;
     this.showError = false;
-    this.userService.registerUser(request).subscribe({
+    this.authService.registerUser(request).subscribe({
       next: (_) => {
         console.log("Successful registration");
         this.router.navigate(['/authentication/login']).then(() => {});

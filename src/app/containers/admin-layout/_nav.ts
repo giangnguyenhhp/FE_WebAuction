@@ -20,9 +20,9 @@ export const navItems: INavData[] = [
     title: true
   },
   {
-    name: 'Base',
-    url: '/base',
-    iconComponent: { name: 'cil-puzzle' },
+    name: 'Product',
+    url: '/admin/product',
+    iconComponent: { name: '' },
   },
   {
     title: true,

@@ -1,0 +1,35 @@
+<div class="w-96">
+  <h1 mat-dialog-title class="text-2xl text-center">Update Product</h1>
+  <form [formGroup]="updateProductFormGroup" (submit)="submit()">
+
+    <mat-dialog-content class="mat-typography">
+
+      <mat-form-field appearance="fill" class="w-full" >
+        <mat-label>Product Name</mat-label>
+        <input formControlName="productName" type="text" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full" >
+        <mat-label>Price Open</mat-label>
+        <input formControlName="priceOpen" type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full" >
+        <mat-label>Description</mat-label>
+        <input formControlName="description" type="text" matInput>
+      </mat-form-field>
+
+      <div class="mat-radio-button ml-3">
+        <mat-radio-group  formControlName="isApproved">Is Approved
+          <mat-radio-button [checked]="!getChecked()"  value="false">No</mat-radio-button>
+          <mat-radio-button [checked]="getChecked()"  value="true" class="ml-4">Yes</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close="close">Close</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

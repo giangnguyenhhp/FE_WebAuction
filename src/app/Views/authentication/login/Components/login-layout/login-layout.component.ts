@@ -28,9 +28,8 @@ export class LoginLayoutComponent {
     const request = <LoginRequestDto>this.loginForm.value
     this.authService.loginUser(request).subscribe({
       next:(res) => {
-        localStorage.setItem("token",res.token);
-        res.isAuthSuccessful = true;
-        this.router.navigate(["/main"]).then(() => {
+        localStorage.setItem("token",res.value.token);
+        this.router.navigate(["/"]).then(() => {
         })
       },
       error:(err:HttpErrorResponse)=>{

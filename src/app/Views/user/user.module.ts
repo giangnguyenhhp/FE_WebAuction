@@ -11,35 +11,38 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { CreateUserComponent } from './Components/create-user/create-user.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {FormModule} from "@coreui/angular";
+import {FormModule, ListGroupModule} from "@coreui/angular";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatSelectModule} from "@angular/material/select";
 import {ShowHidePasswordModule} from "ngx-show-hide-password";
 import { UpdateUserComponent } from './Components/update-user/update-user.component';
+import { UserProfileComponent } from './Components/user-profile/user-profile.component';
 
 
 @NgModule({
   declarations: [
     UserLayoutComponent,
     CreateUserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    UserProfileComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    MatInputModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    FormModule,
-    MatSelectModule,
-    ShowHidePasswordModule,
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        MatInputModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        FormModule,
+        MatSelectModule,
+        ShowHidePasswordModule,
+        ListGroupModule,
+    ]
 })
 export class UserModule { }

@@ -1,0 +1,83 @@
+<div class="container">
+  <div>
+    <button class="btn btn-ghost-secondary" mat-button (click)="openCreateProductDialog()">
+      <mat-icon>add_box</mat-icon>
+      Create New Product
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Admin" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8  text-base text-blue-900">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="productId"> ID </th>
+        <td mat-cell *matCellDef="let product"> {{product.productId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="productName"> Name</th>
+        <td mat-cell *matCellDef="let product">{{product.productName}}</td>
+      </ng-container>
+
+
+      <!-- Concurrency Stamp Column -->
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="priceOpen">Price Open</th>
+        <td mat-cell *matCellDef="let product"> {{product.priceOpen}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="description">Description</th>
+        <td mat-cell *matCellDef="let product"> {{product.description}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="IsApproved">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="isApproved">Is Approved</th>
+        <td mat-cell *matCellDef="let product"> {{product.isApproved}} </td>
+      </ng-container>
+
+      <!-- Update Column -->
+      <ng-container matColumnDef="Update">
+        <th mat-header-cell *matHeaderCellDef> Update</th>
+        <td mat-cell *matCellDef="let product">
+          <button mat-icon-button color="primary" (click)="openUpdateProductDialog(product)">
+            <mat-icon>system_update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let product">
+          <button mat-icon-button color="primary" (click)="deleteProduct(product)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let product; columns: displayedColumns;"></tr>
+
+      <!-- role shown when there is no matching data. -->
+      <tr class="mat-role" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Select page of users"
+                   showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</div>
+
+

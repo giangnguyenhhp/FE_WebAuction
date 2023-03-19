@@ -1,5 +1,5 @@
 <ng-container>
-  <c-header >
+  <c-header>
     <c-container fluid>
       <c-header-brand>
         <c-header-nav>
@@ -15,17 +15,23 @@
         </c-header-nav>
       </c-header-brand>
       <c-header-nav>
-        <c-nav-item>
-          <a cNavLink *ngIf="IsAdminLoggedIn()" routerLink="/admin">Admin Site</a>
+        <c-nav-item *ngIf="IsAdminLoggedIn()">
+          <a cNavLink routerLink="/admin">Admin Site</a>
         </c-nav-item>
-        <c-nav-item>
+        <c-nav-item *ngIf="isUserAuthenticated()">
+          <a cNavLink routerLink="/privacy">Privacy</a>
+        </c-nav-item>
+        <c-nav-item *ngIf="isUserAuthenticated()">
+          <a cNavLink routerLink="/user-profile">User Profile</a>
+        </c-nav-item>
+        <c-nav-item *ngIf="!isUserAuthenticated()">
           <a cNavLink routerLink="/authentication/login">Login</a>
         </c-nav-item>
         <c-nav-item>
           <a cNavLink routerLink="/authentication/register">Register</a>
         </c-nav-item>
-        <c-nav-item>
-          <a cNavLink >
+        <c-nav-item *ngIf="isUserAuthenticated()">
+          <a cNavLink>
             <button (click)="logOut()">LogOut</button>
           </a>
         </c-nav-item>

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {RegisterLayoutComponent} from "./register/Components/register-layout/register-layout.component";
 import {LoginLayoutComponent} from "./login/Components/login-layout/login-layout.component";
-import {
-  ForgotPasswordLayoutComponent
-} from "./forgot-password/Components/forgot-password-layout/forgot-password-layout.component";
+import {ForgotPasswordComponent} from "./Components/forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./Components/reset-password/reset-password.component";
+import {EmailConfirmationComponent} from "./Components/email-confirmation/email-confirmation.component";
 
 const routes: Routes = [
   {
@@ -22,8 +22,15 @@ const routes: Routes = [
       },
       {
         path:'forgotPassword',
-        component:ForgotPasswordLayoutComponent,
-        loadChildren: () => import('./forgot-password/forgot-password.module').then(m=>m.ForgotPasswordModule)
+        component:ForgotPasswordComponent
+      },
+      {
+        path:'resetPassword',
+        component:ResetPasswordComponent
+      },
+      {
+        path:'emailConfirmation',
+        component:EmailConfirmationComponent
       }
     ]
   }

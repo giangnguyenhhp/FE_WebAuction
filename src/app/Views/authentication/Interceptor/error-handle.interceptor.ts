@@ -27,17 +27,25 @@ export class ErrorHandlerService implements HttpInterceptor {
       return this.handleBadRequest(error);
     } else if (error.status === 401) {
       return this.handleUnauthorized(error);
+    } else if(error.status === 403){
+      return this.handleForbidden(error);
+    }else if(error.status === 500){
+      return this.handleServerError(error);
     }
   }
 
   private handleNotFound = (error: HttpErrorResponse): string => {
+    if(this.router.url === '/authentication/login') {
+      return error.error.message;
+    }
     this.router.navigate(['/404']).then(() => {
     });
     return error.message;
   }
 
   private handleBadRequest = (error: HttpErrorResponse): string => {
-    if (this.router.url === '/authentication/register') {
+    if (this.router.url === '/authentication/register' ||
+    this.router.url === '/authentication/resetPassword') {
       let message = '';
       const values = Object.values(error.error.errors);
 
@@ -46,17 +54,25 @@ export class ErrorHandlerService implements HttpInterceptor {
       })
       return message.slice(0, -4);
     } else {
-      return error.error ? error.error : error.message;
+      return error.error.message;
     }
   }
 
   private handleUnauthorized(error: HttpErrorResponse) {
     if(this.router.url === '/authentication/login') {
-      return 'Authentication failed. Wrong Username or Password';
+      return error.error.message;
     }
     else {
-      this.router.navigate(['/authentication/login']);
       return error.message;
     }
+  }
+
+  private handleForbidden(error: HttpErrorResponse) {
+    this.router.navigate(['/forbidden']);
+    return "Forbidden: " + error.message;
+  }
+
+  private handleServerError(error: HttpErrorResponse) {
+    return error.error.message;
   }
 }

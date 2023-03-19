@@ -2,32 +2,63 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminLayoutComponent} from "./containers/admin-layout/admin-layout.component";
 import {MainLayoutComponent} from "./containers/main-layout/main-layout.component";
+import {NotFoundComponent} from "./Views/not-found/not-found.component";
+import {LoginGuard} from "./Views/authentication/Guard/login.guard";
+import {PrivacyComponent} from "./Views/privacy/privacy.component";
+import {ForbiddenComponent} from "./Views/forbidden/forbidden.component";
+import {AdminGuard} from "./Views/authentication/Guard/admin.guard";
+import {UserProfileComponent} from "./Views/user/Components/user-profile/user-profile.component";
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayoutComponent,
+    canActivate:[LoginGuard,AdminGuard],
     children: [
       {
         path: 'role',
-        loadChildren:()=> import('./Views/role/role.module').then(m=>m.RoleModule)
+        loadChildren: () => import('./Views/role/role.module').then(m => m.RoleModule)
       },
       {
-        path:'user',
-        loadChildren:()=> import('./Views/user/user.module').then(m=>m.UserModule)
+        path: 'user',
+        loadChildren: () => import('./Views/user/user.module').then(m => m.UserModule)
+      },
+      {
+        path:'product',
+        loadChildren: () => import('./Views/EntityModels/product-model/product-model.module').then(m => m.ProductModelModule)
       }
     ]
   },
   {
+    path: '',
+    redirectTo: '/main',
+    pathMatch: 'full'},
+  {
     path: 'main',
     component: MainLayoutComponent,
-    children:[
-
-    ]
+    children: []
   },
   {
-    path:'authentication',
-    loadChildren:()=> import('./Views/authentication/authentication.module').then(m=>m.AuthenticationModule)
+    path:'privacy',
+    canActivate:[LoginGuard],
+    component:PrivacyComponent
+  },
+  {
+    path:'user-profile',
+    canActivate:[LoginGuard],
+    component:UserProfileComponent
+  },
+  {
+    path: 'authentication',
+    loadChildren: () => import('./Views/authentication/authentication.module').then(m => m.AuthenticationModule)
+  },
+  {
+    path: '404',
+    component: NotFoundComponent,
+  },
+  {
+    path:'forbidden',
+    component:ForbiddenComponent,
   }
 ];
 
