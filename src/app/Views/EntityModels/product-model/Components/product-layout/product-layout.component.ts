@@ -16,13 +16,13 @@ import {UpdateProductDialogComponent} from "../update-product-dialog/update-prod
 })
 export class ProductLayoutComponent {
   dataSource = new MatTableDataSource<ProductDto>();
-  displayedColumns: string[] = ['Id', 'Name', 'Price', 'Description', 'IsApproved', 'Update', 'Delete'];
+  displayedColumns: string[] = ['Id', 'Name', 'Category', 'Price', 'Description', 'IsApproved', 'Update', 'Delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private productService: ProductService,
-    private dialog : MatDialog
+    private dialog: MatDialog
   ) {
   }
 
@@ -37,8 +37,8 @@ export class ProductLayoutComponent {
   }
 
   openCreateProductDialog() {
-    this.dialog.open(CreateProductDialogComponent).afterClosed().subscribe(res=>{
-      if(res){
+    this.dialog.open(CreateProductDialogComponent).afterClosed().subscribe(res => {
+      if (res) {
         this.getAllProducts();
       }
     })
@@ -47,14 +47,14 @@ export class ProductLayoutComponent {
   applyFilter(event: KeyboardEvent) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    if(this.dataSource.paginator){
+    if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage;
     }
   }
 
   openUpdateProductDialog(product: ProductDto) {
-    this.dialog.open(UpdateProductDialogComponent,{data:product}).afterClosed().subscribe(res=>{
-      if(res){
+    this.dialog.open(UpdateProductDialogComponent, {data: product}).afterClosed().subscribe(res => {
+      if (res) {
         this.getAllProducts()
       }
     })
@@ -62,14 +62,14 @@ export class ProductLayoutComponent {
 
   deleteProduct(product: ProductDto) {
     const result = confirm("Bạn có chắc chắn xóa không ?")
-    if(result){
+    if (result) {
       this.productService.deleteProduct(product.productId).subscribe({
-        next:_ => {
-          this.getAllProducts();
-        },
-        error:(err:HttpErrorResponse)=>{
-          console.log(err.message)
-        }
+          next: _ => {
+            this.getAllProducts();
+          },
+          error: (err: HttpErrorResponse) => {
+            console.log(err.message)
+          }
         }
       )
     }
@@ -82,7 +82,7 @@ export class ProductLayoutComponent {
           this.dataSource.data = res;
         }
       },
-      error : (err:HttpErrorResponse)=>{
+      error: (err: HttpErrorResponse) => {
         return err.message;
       }
     })

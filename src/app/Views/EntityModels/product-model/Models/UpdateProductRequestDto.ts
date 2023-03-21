@@ -3,5 +3,6 @@ export interface UpdateProductRequestDto {
   "productName": string,
   "priceOpen": number,
   "description": string,
-  "isApproved": boolean
+  "isApproved": boolean,
+  "categoryId": string,
 }

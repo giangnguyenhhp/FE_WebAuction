@@ -25,6 +25,10 @@ export const navItems: INavData[] = [
     iconComponent: { name: '' },
   },
   {
+    name: 'Category',
+    url: '/admin/category'
+  },
+  {
     title: true,
     name: 'Extras'
   },

@@ -26,13 +26,18 @@ const routes: Routes = [
       {
         path:'product',
         loadChildren: () => import('./Views/EntityModels/product-model/product-model.module').then(m => m.ProductModelModule)
+      },
+      {
+        path:'category',
+        loadChildren: () => import('./Views/EntityModels/category-model/category-model.module').then(m=>m.CategoryModelModule)
       }
     ]
   },
   {
     path: '',
     redirectTo: '/main',
-    pathMatch: 'full'},
+    pathMatch: 'full'
+  },
   {
     path: 'main',
     component: MainLayoutComponent,

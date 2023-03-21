@@ -19,6 +19,15 @@
         <input formControlName="description" type="text" matInput>
       </mat-form-field>
 
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+            {{category.categoryName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <div class="mat-radio-button ml-3">
         <mat-radio-group  formControlName="isApproved">Is Approved
           <mat-radio-button [checked]="!getChecked()"  value="false">No</mat-radio-button>

@@ -4,6 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ProductService} from "../../Service/product.service";
 import {UpdateProductRequestDto} from "../../Models/UpdateProductRequestDto";
 import {HttpErrorResponse} from "@angular/common/http";
+import {CategoryDto} from "../../../category-model/Models/CategoryDto";
+import {CategoryService} from "../../../category-model/Services/category.service";
 
 @Component({
   selector: 'app-update-product-dialog',
@@ -17,18 +19,23 @@ export class UpdateProductDialogComponent {
     description: new FormControl('', [Validators.required]),
     isApproved: new FormControl(),
     productId: new FormControl(),
+    categoryId: new FormControl(),
   });
+
+  categories : CategoryDto[] = [];
 
   constructor(
     private dialogRef: MatDialogRef<UpdateProductDialogComponent>,
     private productService: ProductService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private categoryService: CategoryService
   ) {
   }
 
   ngOnInit() {
     this.setValidators();
     this.ngInitData();
+    this.getAllCategories();
   }
 
   setValidators() {
@@ -38,7 +45,8 @@ export class UpdateProductDialogComponent {
 
   private ngInitData() {
     this.updateProductFormGroup.patchValue(this.data)
-    console.log(this.data)
+    this.updateProductFormGroup.controls.categoryId.setValue(this.data.category?.categoryId)
+    console.log(this.data.category?.categoryId)
   }
 
   submit() {
@@ -57,5 +65,18 @@ export class UpdateProductDialogComponent {
 
   getChecked() {
     return this.updateProductFormGroup.get('isApproved')?.value;
+  }
+
+  private getAllCategories() {
+    this.categoryService.getAllCategories().subscribe({
+      next:(res)=>{
+        if(res){
+          this.categories = res;
+        }
+      },
+      error:(err:HttpErrorResponse)=>{
+        console.log(err.message)
+      }
+    })
   }
 }
