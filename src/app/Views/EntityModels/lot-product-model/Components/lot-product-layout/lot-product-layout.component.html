@@ -1,0 +1,87 @@
+<div class="container">
+  <div>
+    <button class="btn btn-ghost-secondary" mat-button (click)="openCreateLotProductDialog()">
+      <mat-icon>add_box</mat-icon>
+      Create New LotProduct
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Admin" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8  text-base text-blue-900">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="lotProductId"> ID</th>
+        <td mat-cell *matCellDef="let lotProduct"> {{lotProduct.lotProductId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PriceOpen">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="priceLotOpen"> Price Open</th>
+        <td mat-cell *matCellDef="let lotProduct">{{lotProduct.priceLotOpen}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="PriceOfferMax">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="priceOfferMax"> Price Offer Max</th>
+        <td mat-cell *matCellDef="let lotProduct">{{lotProduct?.priceOfferMax}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="TimeStart">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="timeStarted">Time Start</th>
+        <td mat-cell *matCellDef="let lotProduct">{{lotProduct.timeStarted}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="TimeEnd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="timeEnded">Time End</th>
+        <td mat-cell *matCellDef="let lotProduct"> {{lotProduct.timeEnded}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Products">
+        <th mat-header-cell *matHeaderCellDef>Products</th>
+        <td mat-cell *matCellDef="let lotProduct">
+          <button mat-raised-button (click)="openViewProducts(lotProduct)">View Products</button>
+        </td>
+      </ng-container>
+
+      <!-- Update Column -->
+      <ng-container matColumnDef="Update">
+        <th mat-header-cell *matHeaderCellDef> Update</th>
+        <td mat-cell *matCellDef="let lotProduct">
+          <button mat-icon-button color="primary" (click)="openUpdateLotProductDialog(lotProduct)">
+            <mat-icon>system_update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let lotProduct">
+          <button mat-icon-button color="warn" (click)="deleteLotProduct(lotProduct)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let lotProduct; columns: displayedColumns;"></tr>
+
+      <!-- role shown when there is no matching data. -->
+      <tr class="mat-role" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Select page of users"
+                   showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</div>
+
+

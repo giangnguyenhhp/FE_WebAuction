@@ -9,13 +9,13 @@ import {AdminLayoutComponent} from './containers/admin-layout/admin-layout.compo
 import {
   AvatarModule,
   BadgeModule,
-  BreadcrumbModule,
-  DropdownModule,
+  BreadcrumbModule, ButtonModule,
+  DropdownModule, FormModule,
   GridModule,
   HeaderModule,
   ListGroupModule,
   NavModule,
-  SidebarModule
+  SidebarModule, UtilitiesModule
 } from "@coreui/angular";
 import {PerfectScrollbarModule} from "ngx-perfect-scrollbar";
 import {IconDirective, IconModule, IconSetService} from "@coreui/icons-angular";
@@ -29,6 +29,7 @@ import {PrivacyComponent} from './Views/privacy/privacy.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import { ForbiddenComponent } from './Views/forbidden/forbidden.component';
 import {NotFoundComponent} from "./Views/not-found/not-found.component";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -43,7 +44,8 @@ export function tokenGetter() {
     MainLayoutComponent,
     PrivacyComponent,
     ForbiddenComponent,
-    NotFoundComponent
+    NotFoundComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -63,13 +65,17 @@ export function tokenGetter() {
     HttpClientModule,
     MatDialogModule,
     ListGroupModule,
+    MatAutocompleteModule,
     JwtModule.forRoot({
-      config:{
-        tokenGetter : tokenGetter,
-        allowedDomains : ['localhost:5001'],
-        disallowedRoutes : []
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5001'],
+        disallowedRoutes: []
       }
-    })
+    }),
+    FormModule,
+    ButtonModule,
+    UtilitiesModule
   ],
   providers: [
     {
@@ -83,7 +89,6 @@ export function tokenGetter() {
       multi: true
     },
     IconSetService,
-
   ],
   bootstrap: [AppComponent]
 })

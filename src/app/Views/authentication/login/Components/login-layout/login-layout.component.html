@@ -12,9 +12,10 @@
             <mat-form-field appearance="fill">
               <mat-label class="text-black">User Name</mat-label>
               <input class="w-full" formControlName="userNameOrEmail" matInput>
+              <em class="text-danger" *ngIf="validateControl('userNameOrEmail','required')">
+                Username is required
+              </em>
             </mat-form-field>
-            <em class="text-red-800" *ngIf="validateControl('userNameOrEmail','required')">Username is
-              required</em>
           </div>
           <div class="flex flex-col items-center">
             <mat-form-field appearance="fill" class="pt-2.5">
@@ -26,9 +27,10 @@
                  showHideTrigger="secretaryship2"
                  [showHideStatus]="{ materialIcon: true, id: 'secretaryship2' }"
               ></i>
+              <em class="text-danger" *ngIf="validateControl('password','required')">
+                Password is required
+              </em>
             </mat-form-field>
-            <em class="text-red-800" *ngIf="validateControl('password','required')">Password is
-              required</em>
           </div>
           <div class="flex items-center">
             <a [routerLink]="['/authentication/forgotPassword']" routerLinkActive="active"
@@ -71,7 +73,6 @@
     </mat-card>
   </div>
   <div id="right"></div>
-
 </div>
 
 

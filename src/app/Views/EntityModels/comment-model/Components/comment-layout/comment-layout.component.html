@@ -1,0 +1,61 @@
+<div class="container">
+  <div>
+    <button class="btn btn-ghost-secondary" mat-button (click)="openCreateCommentDialog()">
+      <mat-icon>add_box</mat-icon>
+      Create New Comment
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Admin" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8  text-base text-blue-900">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="commentId"> ID</th>
+        <td mat-cell *matCellDef="let comment"> {{comment.commentId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Content">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="content"> Content</th>
+        <td mat-cell *matCellDef="let comment">{{comment.content}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="User">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="userName">User</th>
+        <td mat-cell *matCellDef="let comment"> {{comment.user.userName}} </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let comment">
+          <button mat-icon-button color="primary" (click)="deleteComment(comment)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let comment; columns: displayedColumns;"></tr>
+
+      <!-- role shown when there is no matching data. -->
+      <tr class="mat-role" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Select page of users"
+                   showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</div>
+
+

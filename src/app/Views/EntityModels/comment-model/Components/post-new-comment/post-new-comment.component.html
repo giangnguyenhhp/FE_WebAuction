@@ -1,0 +1,24 @@
+<div class="w-96">
+  <h1 mat-dialog-title class="text-2xl text-center">Post Comment</h1>
+  <form [formGroup]="postCommentForm" (submit)="submit()">
+    <mat-dialog-content>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Content</mat-label>
+        <input type="text" formControlName="content" matInput>
+        <em class="text-danger" *ngIf="validateControl('content','required')">
+          Content is required !
+        </em>
+        <br>
+        <em class="text-danger" *ngIf="validateControl('content','minlength')">
+          At least ten characters !
+        </em>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close="close">Cancel</button>
+      <button mat-raised-button [mat-dialog-close]="true" type="submit" [disabled]="postCommentForm.invalid">Post</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+

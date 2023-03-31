@@ -30,6 +30,26 @@ const routes: Routes = [
       {
         path:'category',
         loadChildren: () => import('./Views/EntityModels/category-model/category-model.module').then(m=>m.CategoryModelModule)
+      },
+      {
+        path:'lot-product',
+        loadChildren: () => import('./Views/EntityModels/lot-product-model/lot-product-model.module').then(m=>m.LotProductModelModule)
+      },
+      {
+        path:'comment',
+        loadChildren:()=>import('./Views/EntityModels/comment-model/comment-model.module').then(m=>m.CommentModelModule)
+      },
+      {
+        path:'card-member',
+        loadChildren:()=>import('./Views/EntityModels/card-member/card-member.module').then(m=>m.CardMemberModule)
+      },
+      {
+        path:'contact',
+        loadChildren:()=>import('./Views/EntityModels/contact-model/contact-model.module').then(m=>m.ContactModelModule)
+      },
+      {
+        path:'post',
+        loadChildren:()=>import('./Views/EntityModels/post-model/post-model.module').then(m=>m.PostModelModule),
       }
     ]
   },

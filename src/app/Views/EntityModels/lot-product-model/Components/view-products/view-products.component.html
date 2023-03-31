@@ -1,0 +1,15 @@
+<div class="w-96">
+  <p class="text-2xl text-center">List Product</p>
+  <table>
+    <tr>
+      <th>STT</th>
+      <th>Product Name</th>
+      <th>Price Open</th>
+    </tr>
+    <tr *ngFor="let product of products; let i = index">
+      <td>{{++i}}</td>
+      <td>{{product.productName}}</td>
+      <td>{{product.priceOpen}}</td>
+    </tr>
+  </table>
+</div>

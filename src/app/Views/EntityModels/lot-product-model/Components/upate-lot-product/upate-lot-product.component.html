@@ -1,0 +1,43 @@
+<div class="w-96">
+  <h1 mat-dialog-title class="text-2xl text-center">Create New LotProduct</h1>
+  <form [formGroup]="updateLotProductFormGroup" (submit)="submit()">
+
+    <mat-dialog-content class="mat-typography">
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Time Start</mat-label>
+        <input formControlName="timeStarted" type="datetime" matInput>
+        <em class="text-danger" *ngIf="validateControl('timeStarted', 'required')">
+          Time Start is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Time End</mat-label>
+        <input formControlName="timeEnded" type="datetime" matInput>
+        <em class="text-danger" *ngIf="validateControl('timeEnded', 'required')">
+          Time End is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Products</mat-label>
+        <mat-select formControlName="productIds" multiple>
+          <mat-option *ngFor="let product of listProducts" [value]="product.productId" >
+            {{product.productName}}
+          </mat-option>
+        </mat-select>
+        <em class="text-danger" *ngIf="validateControl('productIds', 'required')">
+          Product is required!
+        </em>
+      </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close="close">Close</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="updateLotProductFormGroup.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+
+

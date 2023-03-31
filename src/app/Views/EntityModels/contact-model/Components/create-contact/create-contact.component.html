@@ -1,0 +1,46 @@
+<div class="w-96">
+  <h1 mat-dialog-title class="text-2xl text-center">Create New Contact</h1>
+  <form [formGroup]="createContactForm" (submit)="submit()">
+
+    <mat-dialog-content class="mat-typography">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="fullName" matInput>
+        <em class="text-danger" *ngIf="validateControl('fullName', 'required')">
+          Name is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input type="text" formControlName="email" matInput>
+        <em class="text-danger" *ngIf="validateControl('email', 'required')">
+          Email is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Message</mat-label>
+        <input type="text" formControlName="message" matInput>
+        <em class="text-danger" *ngIf="validateControl('message', 'required')">
+          Message is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Phone Number</mat-label>
+        <input type="text" formControlName="phoneNumber" matInput>
+        <em class="text-danger" *ngIf="validateControl('phoneNumber', 'required')">
+          Phone Number is required!
+        </em>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close="close">Close</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="createContactForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+
+

@@ -6,16 +6,22 @@
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Name</mat-label>
         <input type="text" formControlName="categoryName" matInput>
+        <em class="text-danger" *ngIf="validateControl('categoryName', 'required')">
+          Category Name is required!
+        </em>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Description</mat-label>
         <input type="text" formControlName="description" matInput>
+        <em class="text-danger" *ngIf="validateControl('description', 'required')">
+          Description is required!
+        </em>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-raised-button mat-dialog-close="close">Close</button>
-      <button mat-raised-button [matDialogClose]="true" type="submit">Save</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="createCategoryForm.invalid">Save</button>
     </mat-dialog-actions>
   </form>
 </div>

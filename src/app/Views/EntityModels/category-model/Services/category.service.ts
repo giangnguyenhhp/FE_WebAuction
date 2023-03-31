@@ -24,7 +24,7 @@ export class CategoryService {
   }
 
   updateCategory(request: UpdateCategoryRequest) {
-    return this.http.put<CategoryDto>(`${environment.domain}/api/category/update/${request.categoryId}}`, request)
+    return this.http.put<CategoryDto>(`${environment.domain}/api/category/update/${request.categoryId}`, request)
   }
 
   deleteCategory(categoryId: string) {

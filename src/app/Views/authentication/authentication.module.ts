@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './Components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { EmailConfirmationComponent } from './Components/email-confirmation/email-confirmation.component';
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import { EmailConfirmationComponent } from './Components/email-confirmation/emai
     ResetPasswordComponent,
     EmailConfirmationComponent
   ],
-  imports: [
-    CommonModule,
-    AuthenticationRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        AuthenticationRoutingModule,
+        ReactiveFormsModule,
+        MatInputModule
+    ]
 })
 export class AuthenticationModule { }

@@ -1,0 +1,36 @@
+<div class="w-2/3 mx-auto card">
+  <h1 class="card-header text-center">Update Post</h1>
+  <form [formGroup]="updatePostForm" (submit)="submit()">
+    <div class="card-body">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Title</mat-label>
+        <input type="text" formControlName="title" matInput>
+        <em class="text-danger" *ngIf="validateControl('title', 'required')">
+          Title is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Description</mat-label>
+        <input type="text" formControlName="description" matInput>
+        <em class="text-danger" *ngIf="validateControl('description', 'required')">
+          Description is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Content</mat-label>
+        <textarea matNativeControl type="text" formControlName="content"></textarea>
+        <em class="text-danger" *ngIf="validateControl('content', 'required')">
+          Content is required!
+        </em>
+      </mat-form-field>
+    </div>
+    <div class="card-footer flex justify-around">
+      <button mat-raised-button routerLink="/admin/post" routerLinkActive="true" type="button">Back</button>
+      &nbsp;
+      <button mat-raised-button color="primary" type="submit" [disabled]="updatePostForm.invalid">Save</button>
+    </div>
+  </form>
+</div>
+

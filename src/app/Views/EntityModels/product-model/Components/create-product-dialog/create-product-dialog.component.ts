@@ -15,10 +15,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class CreateProductDialogComponent {
   createProductFormGroup = new FormGroup({
     productName: new FormControl('',[Validators.required]),
-    priceOpen: new FormControl(),
+    priceOpen: new FormControl(0,[Validators.required]),
     description: new FormControl('',[Validators.required]),
-    isApproved: new FormControl(),
-    categoryId : new FormControl(),
+    categoryId : new FormControl('',[Validators.required]),
   });
   categories: CategoryDto[] = [];
 
@@ -35,7 +34,6 @@ export class CreateProductDialogComponent {
   }
 
   setValidators(){
-    this.createProductFormGroup.get('priceOpen')?.setValidators([Validators.required]);
     this.createProductFormGroup.get('isApproved')?.setValidators([Validators.required]);
   }
 
@@ -43,7 +41,7 @@ export class CreateProductDialogComponent {
     const request = <CreateProductRequestDto>this.createProductFormGroup.value
 
     // Chuyển đổi kiểu dữ liệu từ string sang boolean
-    request.isApproved = this.createProductFormGroup.controls['isApproved'].value === 'true';
+    // request.isApproved = this.createProductFormGroup.controls['isApproved'].value === 'true';
 
     this.productService.createProduct(request).subscribe(res=>{
       if(res){
@@ -63,5 +61,11 @@ export class CreateProductDialogComponent {
         console.log(err.message)
       }
     })
+  }
+
+  validateControl(controlName: string, errorName: string) {
+    return this.createProductFormGroup.get(controlName)?.invalid
+      && this.createProductFormGroup.get(controlName)?.touched
+      && this.createProductFormGroup.get(controlName)?.hasError(errorName)
   }
 }

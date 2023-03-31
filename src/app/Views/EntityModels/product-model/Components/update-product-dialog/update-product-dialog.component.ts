@@ -15,11 +15,11 @@ import {CategoryService} from "../../../category-model/Services/category.service
 export class UpdateProductDialogComponent {
   updateProductFormGroup = new FormGroup({
     productName: new FormControl('', [Validators.required]),
-    priceOpen: new FormControl(),
+    priceOpen: new FormControl(0,[Validators.required]),
     description: new FormControl('', [Validators.required]),
     isApproved: new FormControl(),
     productId: new FormControl(),
-    categoryId: new FormControl(),
+    categoryId: new FormControl('',[Validators.required]),
   });
 
   categories : CategoryDto[] = [];
@@ -39,14 +39,12 @@ export class UpdateProductDialogComponent {
   }
 
   setValidators() {
-    this.updateProductFormGroup.get('priceOpen')?.setValidators([Validators.required]);
     this.updateProductFormGroup.get('isApproved')?.setValidators([Validators.required]);
   }
 
   private ngInitData() {
     this.updateProductFormGroup.patchValue(this.data)
     this.updateProductFormGroup.controls.categoryId.setValue(this.data.category?.categoryId)
-    console.log(this.data.category?.categoryId)
   }
 
   submit() {
@@ -78,5 +76,11 @@ export class UpdateProductDialogComponent {
         console.log(err.message)
       }
     })
+  }
+
+  validateControl(controlName: string, errorName: string) {
+    return this.updateProductFormGroup.get(controlName)?.invalid
+      && this.updateProductFormGroup.get(controlName)?.touched
+      && this.updateProductFormGroup.get(controlName)?.hasError(errorName)
   }
 }

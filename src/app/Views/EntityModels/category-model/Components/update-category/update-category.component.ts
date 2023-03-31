@@ -43,4 +43,10 @@ export class UpdateCategoryComponent {
   private ngInitData() {
     this.updateCategoryForm.patchValue(this.data)
   }
+
+  validateControl(controlName: string, errorName: string) {
+    return this.updateCategoryForm.get(controlName)?.invalid
+      && this.updateCategoryForm.get(controlName)?.touched
+      && this.updateCategoryForm.get(controlName)?.hasError(errorName)
+  }
 }

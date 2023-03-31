@@ -6,29 +6,27 @@
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>User Name</mat-label>
         <input formControlName="userName" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('userName','required')">UserName is required</em>
       </mat-form-field>
-      <em *ngIf="validateControl('userName','required')">UserName is required</em>
-
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Email Address</mat-label>
         <input formControlName="email" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('email','email')">Please provide a valid email</em>
+        <em class="text-danger" *ngIf="validateControl('email','required')">Email is required</em>
       </mat-form-field>
-      <em *ngIf="validateControl('email','email')">Please provide a valid email</em>
-      <em *ngIf="validateControl('email','required')">Email is required</em>
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Address</mat-label>
         <input formControlName="address" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('address','required')">Address is required</em>
       </mat-form-field>
-      <em *ngIf="validateControl('address','required')">Address is required</em>
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Phone Number</mat-label>
         <input formControlName="phoneNumber" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('phoneNumber', 'required')">Phone Number is required</em>
       </mat-form-field>
-      <em *ngIf="validateControl('phoneNumber', 'required')">Phone Number is required</em>
-
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Password</mat-label>
@@ -38,9 +36,8 @@
            showHideTrigger="secretaryship"
            [showHideStatus]="{ materialIcon: true, id: 'secretaryship' }"
         ></i>
+        <em class="text-danger" *ngIf="validateControl('password', 'required')">Password is required</em>
       </mat-form-field>
-      <em *ngIf="validateControl('password', 'required')">Password is required</em>
-
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Confirm Password</mat-label>
@@ -50,9 +47,9 @@
            showHideTrigger="secretaryship2"
            [showHideStatus]="{ materialIcon: true, id: 'secretaryship2' }"
         ></i>
+        <em class="text-danger" *ngIf="validateControl('confirmPassword', 'required')">Confirmation is required </em>
+        <em class="text-danger" *ngIf="validateControl('confirmPassword', 'mustMatch')"> Passwords must match</em>
       </mat-form-field>
-      <em *ngIf="validateControl('confirmPassword', 'required')">Confirmation is required </em>
-      <em *ngIf="validateControl('confirmPassword', 'mustMatch')"> Passwords must match</em>
 
       <mat-form-field appearance="fill" class="w-full">
         <mat-label>Role</mat-label>
@@ -63,12 +60,11 @@
         </mat-select>
       </mat-form-field>
 
-
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
       <button mat-raised-button mat-dialog-close="close">Close</button>
-      <button mat-raised-button [matDialogClose]="true" type="submit">Save</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="createUserFormGroup.invalid">Save</button>
     </mat-dialog-actions>
 
   </form>

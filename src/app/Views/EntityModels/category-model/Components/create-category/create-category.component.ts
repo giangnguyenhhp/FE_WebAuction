@@ -36,4 +36,10 @@ export class CreateCategoryComponent {
       }
     })
   }
+
+  validateControl(controlName: string, errorName: string) {
+    return this.createCategoryForm.get(controlName)?.invalid
+      && this.createCategoryForm.get(controlName)?.touched
+      && this.createCategoryForm.get(controlName)?.hasError(errorName)
+  }
 }

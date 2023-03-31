@@ -7,16 +7,25 @@
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Product Name</mat-label>
         <input formControlName="productName" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('productName', 'required')">
+          Product Name is required!
+        </em>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Price Open</mat-label>
         <input formControlName="priceOpen" type="number" matInput>
+        <em class="text-danger" *ngIf="validateControl('priceOpen', 'required')">
+          Price Open is required!
+        </em>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="w-full" >
         <mat-label>Description</mat-label>
         <input formControlName="description" type="text" matInput>
+        <em class="text-danger" *ngIf="validateControl('description', 'required')">
+          Description is required!
+        </em>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="w-full">
@@ -26,6 +35,9 @@
             {{category.categoryName}}
           </mat-option>
         </mat-select>
+        <em class="text-danger" *ngIf="validateControl('categoryId', 'required')">
+          Category is required!
+        </em>
       </mat-form-field>
 
       <div class="mat-radio-button ml-3">
@@ -38,7 +50,7 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-raised-button mat-dialog-close="close">Close</button>
-      <button mat-raised-button [matDialogClose]="true" type="submit">Save</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="updateProductFormGroup.invalid">Save</button>
     </mat-dialog-actions>
   </form>
 </div>

@@ -1,0 +1,45 @@
+<div class="w-96">
+  <h1 mat-dialog-title class="text-2xl text-center">Create New CardMember</h1>
+  <form [formGroup]="createCardMemberForm" (submit)="submit()">
+
+    <mat-dialog-content class="mat-typography">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Name</mat-label>
+        <input type="text" formControlName="nameMember" matInput>
+        <em class="text-danger" *ngIf="validateControl('nameMember', 'required')">
+          Name is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Address</mat-label>
+        <input type="text" formControlName="addressMember" matInput>
+        <em class="text-danger" *ngIf="validateControl('addressMember', 'required')">
+        Address is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Phone Number</mat-label>
+        <input type="text" formControlName="phoneNumberMember" matInput>
+        <em class="text-danger" *ngIf="validateControl('phoneNumberMember', 'required')">
+          Phone Number is required!
+        </em>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Deposit</mat-label>
+        <input type="number" formControlName="deposit" matInput>
+        <em class="text-danger" *ngIf="validateControl('deposit', 'min')">
+          Số tiền cọc tối thiểu là 500.000 đồng
+        </em>
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close="close">Close</button>
+      <button mat-raised-button [matDialogClose]="true" type="submit" [disabled]="createCardMemberForm.invalid">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+

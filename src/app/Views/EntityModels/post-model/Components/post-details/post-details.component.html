@@ -1,0 +1,16 @@
+<div class="w-2/3 mx-auto card">
+  <h1 class="card-header text-center">{{post.title}}</h1>
+  <div class="card-body">
+    <h1 class="card-title">{{post.description}}</h1>
+    <h2 class="card-text">{{post.content}}</h2>
+  </div>
+  <div class="card-footer">
+    <p>Date Created : {{post.dateCreated}}</p>
+    <p>Date Updated : {{post.dateUpdated}}</p>
+    <p>Author : {{post.user?.userName}}</p>
+  </div>
+  <div class="flex justify-around">
+    <button class="btn btn-primary" routerLink="/admin/post" routerLinkActive="true">Back</button>
+    <button class="btn btn-success" routerLink="/admin/post/update" [queryParams]="{id:postId}" routerLinkActive="true" >Update</button>
+  </div>
+</div>

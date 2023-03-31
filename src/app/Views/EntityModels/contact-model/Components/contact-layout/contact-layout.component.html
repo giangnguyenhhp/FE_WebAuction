@@ -1,0 +1,87 @@
+<div class="container">
+  <div>
+    <button class="btn btn-ghost-secondary" mat-button (click)="openCreateContactDialog()">
+      <mat-icon>add_box</mat-icon>
+      Create New Contact
+    </button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Admin" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8  text-base text-blue-900">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="contactId"> ID </th>
+        <td mat-cell *matCellDef="let contact"> {{contact.contactId}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="fullName">Name</th>
+        <td mat-cell *matCellDef="let contact">{{contact.fullName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="email">Email</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Message">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="message">Message</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.message}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="phoneNumber">Phone Number</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.phoneNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="dateSent">Date Sent</th>
+        <td mat-cell *matCellDef="let contact"> {{contact.dateSent}} </td>
+      </ng-container>
+
+<!--      &lt;!&ndash; Update Column &ndash;&gt;-->
+<!--      <ng-container matColumnDef="Update">-->
+<!--        <th mat-header-cell *matHeaderCellDef> Update</th>-->
+<!--        <td mat-cell *matCellDef="let contact">-->
+<!--          <button mat-icon-button color="primary" (click)="openUpdateContactDialog(contact)">-->
+<!--            <mat-icon>system_update</mat-icon>-->
+<!--          </button>-->
+<!--        </td>-->
+<!--      </ng-container>-->
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="Delete">
+        <th mat-header-cell *matHeaderCellDef> Delete</th>
+        <td mat-cell *matCellDef="let contact">
+          <button mat-icon-button color="primary" (click)="deleteContact(contact)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let contact; columns: displayedColumns;"></tr>
+
+      <!-- role shown when there is no matching data. -->
+      <tr class="mat-role" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                   aria-label="Select page of users"
+                   showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</div>
+
+
+

@@ -1,4 +1,4 @@
-import { INavData } from '@coreui/angular';
+import {INavData} from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
@@ -8,25 +8,45 @@ export const navItems: INavData[] = [
   {
     name: 'Roles',
     url: '/admin/role',
-    iconComponent: { name: '' }
+    iconComponent: {name: ''}
   },
   {
     name: 'Users',
     url: '/admin/user',
-    iconComponent: { name: '' }
+    iconComponent: {name: ''}
   },
   {
-    name: 'Components',
+    name: 'Entities Model',
     title: true
   },
   {
     name: 'Product',
     url: '/admin/product',
-    iconComponent: { name: '' },
+    iconComponent: {name: ''},
   },
   {
     name: 'Category',
     url: '/admin/category'
+  },
+  {
+    name: 'Lot Product',
+    url: '/admin/lot-product'
+  },
+  {
+    name: 'Comment',
+    url: '/admin/comment',
+  },
+  {
+    name: 'Card Member',
+    url: '/admin/card-member'
+  },
+  {
+    name: 'Contact',
+    url: '/admin/contact'
+  },
+  {
+    name: 'Post',
+    url: '/admin/post'
   },
   {
     title: true,
@@ -34,16 +54,16 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Pages',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
+    url: '/authentication',
+    iconComponent: {name: 'cil-star'},
     children: [
       {
         name: 'Login',
-        url: '/login'
+        url: '/authentication/login'
       },
       {
         name: 'Register',
-        url: '/register'
+        url: '/authentication/register'
       },
       {
         name: 'Error 404',
